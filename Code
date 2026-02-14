@@ -1,0 +1,69 @@
+def income_armor():
+    print("\n🛡️ INCOME ARMOR - Freelance Protection System\n")
+
+    expenses = float(input("Monthly Expenses (₹): "))
+    income = float(input("Average Monthly Income (₹): "))
+    savings = float(input("Current Savings (₹): "))
+    rate = float(input("Hourly Rate (₹): "))
+    hours = float(input("Hours Worked Per Month: "))
+
+    print("\n📊 ANALYSIS\n")
+
+    # Survival Months
+    if expenses > 0:
+        survival_months = savings / expenses
+    else:
+        survival_months = 0
+
+    # Safe Hourly Rate
+    if hours > 0:
+        safe_rate = expenses / hours
+    else:
+        safe_rate = 0
+
+    # Stability Score
+    score = 50
+
+    if survival_months >= 6:
+        score += 25
+    elif survival_months >= 3:
+        score += 10
+    else:
+        score -= 15
+
+    if income >= expenses:
+        score += 20
+    else:
+        score -= 20
+
+    if rate >= safe_rate:
+        score += 15
+    else:
+        score -= 10
+
+    score = max(0, min(100, score))
+
+    # Income Gap
+    income_gap = expenses - income if income < expenses else 0
+
+    print(f"💰 You can survive for: {round(survival_months,1)} months without income.")
+    print(f"🕒 Minimum Safe Hourly Rate: ₹{round(safe_rate,2)}")
+    print(f"🛡️ Stability Score: {score}/100")
+
+    print("\n💬 COACH MESSAGE:\n")
+
+    if score >= 80:
+        print("You're in a strong position. Keep building and scaling confidently!")
+    elif score >= 60:
+        print("You're stable, but there's room to strengthen your safety net.")
+    elif score >= 40:
+        print("You're managing, but improving savings or rates will help you breathe easier.")
+    else:
+        print("Right now you're financially exposed. Let's build protection step by step.")
+
+    if income_gap > 0:
+        print(f"\n⚠️ You need ₹{round(income_gap,2)} more per month to cover expenses safely.")
+    else:
+        print("\n✅ Your income currently covers your expenses.")
+
+    print("\nKeep going. Small improvements create strong armor.\n")
